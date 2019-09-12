@@ -1,0 +1,53 @@
+// If you want to override variables do it here
+@import "variables";
+
+// Import styles
+@import "node_modules/@coreui/coreui/scss/coreui";
+
+// If you want to add something do it here
+@import "custom";
+
+
+
+thead{
+  background-color: $table-head-bg;
+  color: $white;
+}
+
+thead tr th{
+  text-align: center !important;
+}
+
+#pnlBody{
+  margin-bottom: 2.4rem;
+}
+
+.navbar{
+  background-image: linear-gradient(to top, rgba(255,0,0,0), rgb(5, 44, 80));
+  opacity: 0.85;
+  filter: alpha(opacity=85);
+  border:0px !important;
+}
+
+.sidebar .nav-link{
+  padding: 0.50rem 1rem;
+  font-size: large;
+}
+
+@media (min-width: 992px){
+  .sidebar-minimized .sidebar .nav-link{
+    padding: 0.50rem 1rem;
+  }
+  .sidebar-minimized .sidebar .nav-link .fa{
+     margin-right: 1rem;
+  }
+}
+
+.toast{
+  right: 0;
+  position: relative;
+  width: 250px;
+}
+
+
+    
