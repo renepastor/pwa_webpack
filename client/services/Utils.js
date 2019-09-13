@@ -1,7 +1,8 @@
 const Utils = { 
     //
     // 
-    fnFetch : (url, data) =>{
+    fnFetch : (param) =>{
+        var obj = Object.assign(param, {method:"POST"});
         var misCabeceras = new Headers({
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -17,15 +18,15 @@ const Utils = {
                         headers: misCabeceras,
                         mode: 'cors',
                         body: JSON.stringify({
-                            "query":data
+                            "query":obj.data
                         })                      
                      };
-        return fetch(url,miInit).then(res => {
+        return fetch(obj.url,miInit).then(res => {
             if (!res.ok) {
                 throw Error(res.statusText);
             }
             return res.json();
-        }).catch(err => console.log("Error..",err));
+        });
     }
 
     // --------------------------------
