@@ -1,4 +1,4 @@
-const Utils = { 
+const UtilsServ = { 
     //
     // 
     fnFetch : (param) =>{
@@ -19,8 +19,9 @@ const Utils = {
                         mode: 'cors',
                         body: JSON.stringify({
                             "query":obj.data
-                        })                      
+                        })
                      };
+        //  console.log("jjjjjjjjjjjj",obj.url,miInit)
         return fetch(obj.url,miInit).then(res => {
             if (!res.ok) {
                 throw Error(res.statusText);
@@ -55,4 +56,4 @@ const Utils = {
     }
 }
 
-export default Utils;
+export default UtilsServ;

@@ -1,4 +1,4 @@
-let Bottombar = {
+let BottombarComp = {
     render: async () => {
         let view =  /*html*/`
         <div class="col"></div>
@@ -17,4 +17,4 @@ let Bottombar = {
 
 }
 
-export default Bottombar;
+export default BottombarComp;

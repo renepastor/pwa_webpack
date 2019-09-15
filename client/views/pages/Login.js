@@ -1,10 +1,9 @@
-import UsuarioServ from '../../services/UsuarioServ'
+import usuarioServ from '../../services/UsuarioServ'
 
 let Login = {
     render : async () => {
-		console.log("loguin...............................................");        
-        let view =  /*html*/`
-            <section style="z-index:2000"  class="section position-fixed w-100 h-100 bg-light" tabindex="-1" role="dialog">
+       let view =  /*html*/`
+        <section style="z-index:2000"  class="section position-fixed w-100 h-100 bg-light" tabindex="-1" role="dialog">
                 <div class="p-2 content">
 					<div class="d-flex justify-content-center p-2">
 						<div class="brand_logo_container">
@@ -12,19 +11,17 @@ let Login = {
 						</div>
 					</div>
 					<div class="d-flex justify-content-center form_container p-2">
-						<div class="fade show active" id="pnlUsuarioSesion" role="tabpanel" aria-labelledby="tab-ldap"></div>
-						<div class="fade show active" id="pnlRolesSesion" role="tabpanel" aria-labelledby="tab-ldap"></div>
 						<div class="fade show active tab-content" id="ldap" role="tabpanel" aria-labelledby="tab-ldap" id="pills-tabContent">
 						<form method="POST" id="formLogin" class=" m-2">
 							<div class="card-header p-1"><b>Iniciar Sesion</b></div>
-							<div class="input-group mb-3">
-								<div class="input-group-prepend">
+							<div class="input-group mb-1">
+								<div class="input-group-prepend fa-span">
 									<span class="input-group-text"><i class="fa fa-user"></i></span>
 								</div>
 								<input placeholder="Nombre de usuario" required="" type="text" id="pUsuario" name="pUsuario" class="texto form-control">
 							</div>
 							<div class="input-group mb-2">
-								<div class="input-group-prepend">
+								<div class="input-group-prepend fa-span">
 									<span class="input-group-text"><i class="fa fa-key"></i></span>
 								</div>
 								<input placeholder="Contraseña" required="" type="password" id="pClave" name="pClave" class="texto form-control">
@@ -49,7 +46,7 @@ let Login = {
 			e.preventDefault();
 			var pUsuario = $("#pUsuario").val();
 			var pClave = $("#pClave").val();
-			UsuarioServ.token(pUsuario, pClave);
+			usuarioServ.token(pUsuario, pClave);
 		});
 	}
 }

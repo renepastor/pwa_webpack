@@ -1,3 +1,5 @@
+import loginComp from '../components/LoginComp'
+
 function resizeBroadcast() {
     var timesRun = 0;
     var interval = setInterval(function(){
@@ -10,7 +12,7 @@ function resizeBroadcast() {
   }
 
 
-let Navbar = {
+let NavbarComp = {
     render: async () => {
       
       let view =  /*html*/`  
@@ -75,10 +77,18 @@ let Navbar = {
       $('a[href="#"][data-top!=true]').click(function(e){
         e.preventDefault();
       });
-    
-    
+      
+
+      var bar = '<div id="pnlLogin" style="width:21em""></div>';
+      Popover;
+      $('#btnLogin').popover({title:"Perfil Usuario", html:true,content:bar});
+      $('#btnLogin').on("click", function(){
+        $("#pnlLogin").html(loginComp.popover())
+      });
+  
+      
     }
 
 }
 
-export default Navbar;
+export default NavbarComp;
