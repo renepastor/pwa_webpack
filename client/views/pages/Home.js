@@ -1,6 +1,7 @@
 // --------------------------------
 //  Define Data Sources
 // --------------------------------
+import utils from '../../services/UtilsServ'
 
 let Home = {
     render : async () => {
@@ -8,8 +9,8 @@ let Home = {
         let view =  /*html*/`
             <section class="section text-center">
                 <h5>Facturacion Movil </h5>
-                <b>${user.cuenta}</b>
-                <i>${user.alias}</i>
+                <b>${utils.getSession("ssUserName")}</b>
+                <i>${utils.getSession("ssAlias")}</i>
             </section>
         `
         return view

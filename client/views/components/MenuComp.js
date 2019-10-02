@@ -35,7 +35,7 @@ let MenuComp = {
           )}`;
           $("#listMenu").append(h);
           //$("#userName").html(cuenta+'<i class="fa fa-angle-down"></i>');
-          $("span.cuentaMenu").html('MENU<br><small class="rol"> Principal </small>');
+          //$("span.cuentaMenu").html('MENU<br><small class="rol"> Principal </small>');
         }
     }
 }

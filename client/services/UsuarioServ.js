@@ -9,22 +9,32 @@ const UsuarioServ = {
     // --------------------------------
     token : (pUsuario, pClave) => {
         var query = `mutation{auth(input:{pUsuario:"${pUsuario}" pClave:"${pClave}"}){jwt}}`;
-        utilsServ.fnFetch({url: config.HOST_SERVICE, data: query})
+        console.log("Logos......");
+        utilsServ.fnFetch({url: config.HOST_GRAPH, data: query})
         .then(res => {
-            localStorage.setItem("token",res.data.auth.jwt);
+            console.log("Logos......222",res.data.auth.jwt);
+            utilsServ.setSession("token", res.data.auth.jwt);
             query = `query{miUsuario{cuenta persId alias
                 usrRolesByUserId{nodes{rolId permiso}}
                 }}`;
-            utilsServ.fnFetch({url: config.HOST_SERVICE, data: query}).then(resUser => {
-                localStorage.setItem("dataUser",JSON.stringify(resUser.data.miUsuario))
-                window.location = window.location.origin;
-            })
-        })
+            utilsServ.fnFetch({url: config.HOST_GRAPH, data: query
+            }).then(resUser => {
+                console.log("Logos......333", resUser.data);
+                utilsServ.setSession("ssUserName", resUser.data.miUsuario.cuenta);
+                utilsServ.setSession("ssAlias", resUser.data.miUsuario.alias);
+                utilsServ.setSession("ssPersId", resUser.data.miUsuario.persId);
+                window.location = "index.html";
+            }).catch(err => alertasComp.error(`Usuario y/o contraseña incorrectos`));
+        });
+        
     }
-    
+    // --------------------------------
+    //  Acceso de usuario
+    // --------------------------------
     ,primerRolMenu : () => {
         UsuarioServ.rolesUsuario()
         .then(res => {
+            console.log(";;;;:::::,,,,,,.......");
             var listRoles = res.data.miUsuario.usrRolesByUserId.nodes;
             console.log("lista menu..", listRoles[0].rolId)
             UsuarioServ.menuUsuario(listRoles[0].rolId)
@@ -39,16 +49,19 @@ const UsuarioServ = {
     //
     // Roles del Usuario
     , rolesUsuario : () => {
-        var datosUser = JSON.parse(localStorage.dataUser);
         var query =`query {miUsuario {cuenta persId
             usrRolesByUserId {nodes {rolId permiso rol:roleByRolId {nombre id} }}
         }}`;
-        var allRolUser = utilsServ.fnFetch({url: config.HOST_SERVICE, data: query})
-        .then(resUser => resUser)
+        var allRolUser = utilsServ.fnFetch({url: config.HOST_GRAPH, data: query})
+        .then(resUser => {
+            return (resUser)
+        })
         .catch(errorUser => alertasComp.error(`No existe usuario en SIstema de personal <span hidden>${errorUser}</span>`));
         return allRolUser;
     }
-
+    // --------------------------------
+    //  Acceso de usuario
+    // --------------------------------
     ,menuUsuario : (idRol="001") => {
         var query =`query{
                 roleById(id: "${idRol}") {
@@ -59,7 +72,7 @@ const UsuarioServ = {
                             nodes {enlaceByEnlaId {nombre nivel ruta imagen
                 }}}}}}}}}
         }`;
-        var alMenuUser = utilsServ.fnFetch({url: config.HOST_SERVICE, data: query})
+        var alMenuUser = utilsServ.fnFetch({url: config.HOST_GRAPH, data: query})
         .then(menuUser => menuUser)
         .catch(errorMenu => alertasComp.error(`No existe usuario en SIstema de personal <span hidden>${errorMenu}</span>`));
         return alMenuUser;

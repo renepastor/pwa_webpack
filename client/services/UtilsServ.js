@@ -7,10 +7,10 @@ const UtilsServ = {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         });
-        if (localStorage && localStorage.token) {
+        if (sessionStorage && UtilsServ.getSession("token")) {
             misCabeceras = new Headers({
                 'Accept': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.token,
+                'Authorization': 'Bearer ' + UtilsServ.getSession("token"),
                 'Content-Type': 'application/json'
             });
         }
@@ -53,6 +53,12 @@ const UtilsServ = {
     // --------------------------------
     , sleep: (ms) => {
         return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    , getSession(name){
+        return window.sessionStorage.getItem(name)
+    }
+    , setSession(nombre, valor){
+        window.sessionStorage.setItem(nombre, valor)
     }
 }
 

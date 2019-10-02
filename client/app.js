@@ -4,7 +4,7 @@ import "./scss/style.scss";
 import './css/sistema.css';
 import './css/animate.css';
 
-import './js/app.js'
+///import './js/app.js'
 import './js/main.js'
 //import './js/js.js'
 
@@ -12,15 +12,19 @@ import './js/main.js'
 
 import Login              from './views/pages/Login.js'
 import Home               from './views/pages/Home.js'
+import Equipos            from './views/pages/Equipos.js'
+import Materiales         from './views/pages/Materiales.js'
+import ManoObra           from './views/pages/ManoObra.js'
+
 import Facturar           from './views/pages/Facturar.js'
 import About              from './views/pages/About.js'
 import Error404           from './views/pages/Error404.js'
-
 import navbarComp         from './views/components/NavbarComp.js'
 import bottombarComp      from './views/components/BottombarComp.js' 
-
 import utilsServ          from './services/UtilsServ.js'
 import usuarioServ        from './services/UsuarioServ'
+
+const pag = 20;
 
 // List of supported routes. Any url other than these routes will throw a 404 error
 const routes = {
@@ -28,6 +32,9 @@ const routes = {
     , '/login'                : Login
     , '/facturar'             : Facturar
     , '/about'                : About
+    , '/equipos'              : Equipos
+    , '/materiales'           : Materiales
+    , '/manoobra'             : ManoObra
 };
 
 
@@ -41,7 +48,7 @@ const router = async () => {
     const footer = null || document.getElementById('footer_container');
 
     // Render the Header and footer of the page
-    if(!localStorage.getItem("token")){
+    if(!utilsServ.getSession("token")){
         inicio.innerHTML = await Login.render();
         await Login.after_render(); 
     }else{
@@ -63,7 +70,7 @@ const router = async () => {
         await page.after_render();
 
         // Menu para el usuario
-        if($("#listMenu").text().trim()===""){
+        if($("#listMenu").text().trim() == ""){
             usuarioServ.primerRolMenu()
         }
         

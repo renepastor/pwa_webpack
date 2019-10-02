@@ -23,22 +23,19 @@ insert into nucleo.roles (sistema, nombre, descripcion,usuario) values ('PRECIO_
 
 -------******ENLACES******--
 insert into nucleo.enlaces (padre_id,nivel,orden,nombre,imagen,ruta,ayuda,usuario) values 
-(1011100000000001,1,2,'PRECIO UNITARIO','fa-linode', 'javascript:void(0)', '',1);
+(1011100000000001,1,2,'Precios Unitarios','fa-linode', '#/precioUnitario', '',1);
 insert into nucleo.enlaces (padre_id,nivel,orden,nombre,imagen,ruta,ayuda,usuario) values 
-((SELECT id FROM nucleo.enlaces WHERE nombre='PRECIO UNITARIO'),2,20,'Precios nucleos','fa-linode', '#precioUnitario', '',1);
+(1011100000000001,1,4,'Admin Equipos','fa-truck', '#/equipos', '',1);
 insert into nucleo.enlaces (padre_id,nivel,orden,nombre,imagen,ruta,ayuda,usuario) values 
-((SELECT id FROM nucleo.enlaces WHERE nombre='PRECIO UNITARIO'),2,20,'Admin Equipos','fa-truck', '#equipos', '',1);
+(1011100000000001,1,8,'Admin Mano de Obra','fa-male', '#/manoobra', '',1);
 insert into nucleo.enlaces (padre_id,nivel,orden,nombre,imagen,ruta,ayuda,usuario) values 
-((SELECT id FROM nucleo.enlaces WHERE nombre='PRECIO UNITARIO'),2,20,'Admin Mano de Obra','fa-male', '#manoObras', '',1);
-insert into nucleo.enlaces (padre_id,nivel,orden,nombre,imagen,ruta,ayuda,usuario) values 
-((SELECT id FROM nucleo.enlaces WHERE nombre='PRECIO UNITARIO'),2,20,'Admin Material','fa-area-chart', '#materiales', '',1);
+(1011100000000001,1,10,'Admin Material','fa-area-chart', '#/materiales', '',1);
 -------******MENUS******--
 insert into nucleo.menues (rol_id, enla_id,usuario) values 
-((SELECT id FROM nucleo.roles WHERE nombre='PRECIO_UNITARIO'),(SELECT id FROM nucleo.enlaces WHERE nombre='PRECIO UNITARIO'),1),
 ((SELECT id FROM nucleo.roles WHERE nombre='PRECIO_UNITARIO'),(SELECT id FROM nucleo.enlaces WHERE nombre='Admin Equipos'),1),
 ((SELECT id FROM nucleo.roles WHERE nombre='PRECIO_UNITARIO'),(SELECT id FROM nucleo.enlaces WHERE nombre='Admin Mano de Obra'),1),
 ((SELECT id FROM nucleo.roles WHERE nombre='PRECIO_UNITARIO'),(SELECT id FROM nucleo.enlaces WHERE nombre='Admin Material'),1),
-((SELECT id FROM nucleo.roles WHERE nombre='PRECIO_UNITARIO'),(SELECT id FROM nucleo.enlaces WHERE nombre='Precios nucleos'),1);
+((SELECT id FROM nucleo.roles WHERE nombre='PRECIO_UNITARIO'),(SELECT id FROM nucleo.enlaces WHERE nombre='Precios Unitarios'),1);
 
 -------******USUARIO ROL******--
 --INSERT INTO nucleo.usr_roles(user_id,rol_id,expira,permiso,usuario) VALUES
@@ -55,29 +52,6 @@ insert into nucleo.usuarios(pers_id, cuenta, alias, clave,usuario) values
 INSERT INTO nucleo.usr_roles(user_id,rol_id,expira,permiso,usuario) VALUES
 (1001000000016141,(SELECT id FROM nucleo.roles WHERE nombre='PRECIO_UNITARIO'),'2050-01-01','{}','rpmamani');
 
-/*
--------******DOMOTICA******--
-SELECT setval('unitario.ambientes_id_seq', 1011100000000000);
-INSERT INTO nucleo.ambientes(descripcion) VALUES('Entrada');
-INSERT INTO nucleo.ambientes(descripcion) VALUES('Central');
-INSERT INTO nucleo.ambientes(descripcion) VALUES('Interior');
-
-SELECT setval('unitario.dispositivos_id_seq', 1011100000000000);
-INSERT INTO nucleo.dispositivos(ambiente_id, tipo_dispositivo_id, valor, usuario)VALUES(1011100000000001, nucleo.fn_tipo_nombre_id('LUZ'),'false', 'rpmamani');
-INSERT INTO nucleo.dispositivos(ambiente_id, tipo_dispositivo_id, estado_dispositivo, valor, usuario)VALUES(1011100000000002, nucleo.fn_tipo_nombre_id('LUZ'), true,'false', 'rpmamani');
-INSERT INTO nucleo.dispositivos(ambiente_id, tipo_dispositivo_id, valor, usuario)VALUES(1011100000000003, nucleo.fn_tipo_nombre_id('LUZ'),'false', 'rpmamani');
-
-SELECT setval('unitario.user_dispositivos_id_seq', 1011100000000000);
-INSERT INTO nucleo.user_dispositivos(dispositivo_id, persona_id)VALUES(1011100000000001, 1001000000016110);
-INSERT INTO nucleo.user_dispositivos(dispositivo_id, persona_id)VALUES(1011100000000002, 1001000000016110);
-INSERT INTO nucleo.user_dispositivos(dispositivo_id, persona_id)VALUES(1011100000000003, 1001000000016110);
-INSERT INTO nucleo.user_dispositivos(dispositivo_id, persona_id)VALUES(1011100000000001, 1001000000016140);
-INSERT INTO nucleo.user_dispositivos(dispositivo_id, persona_id)VALUES(1011100000000002, 1001000000016140);
-INSERT INTO nucleo.user_dispositivos(dispositivo_id, persona_id)VALUES(1011100000000003, 1001000000016140);
-INSERT INTO nucleo.user_dispositivos(dispositivo_id, persona_id)VALUES(1011100000000001, 1001000000016141);
-INSERT INTO nucleo.user_dispositivos(dispositivo_id, persona_id)VALUES(1011100000000002, 1001000000016141);
-INSERT INTO nucleo.user_dispositivos(dispositivo_id, persona_id)VALUES(1011100000000003, 1001000000016141);
-*/
 
 commit;
 
